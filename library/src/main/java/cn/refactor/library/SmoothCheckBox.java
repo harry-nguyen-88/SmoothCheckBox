@@ -173,17 +173,10 @@ public class SmoothCheckBox extends View implements Checkable {
         }
     }
 
-    @Override
-    public void setChecked(boolean checked, boolean isTriggerCallback) {
+    public void setCheckedSilence(boolean checked) {
         mChecked = checked;
         reset();
         invalidate();
-        if (!isTriggerCallback) {
-            return;
-        }
-        if (mListener != null) {
-            mListener.onCheckedChanged(SmoothCheckBox.this, mChecked);
-        }
     }
     
     /**
@@ -210,7 +203,7 @@ public class SmoothCheckBox extends View implements Checkable {
         }
     }
 
-    public void setChecked(boolean checked, boolean animate, boolean isTriggerCallback) {
+    public void setCheckedSilence(boolean checked, boolean animate) {
         if (animate) {
             mTickDrawing = false;
             mChecked = checked;
@@ -219,14 +212,7 @@ public class SmoothCheckBox extends View implements Checkable {
                 startCheckedAnimation();
             } else {
                 startUnCheckedAnimation();
-            }
-            if (!isTriggerCallback) {
-               return;
-            }
-            if (mListener != null) {
-                mListener.onCheckedChanged(SmoothCheckBox.this, mChecked);
-            }
-
+            }         
         } else {
             this.setChecked(checked);
         }
